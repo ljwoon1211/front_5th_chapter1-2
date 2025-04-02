@@ -12,7 +12,10 @@ export const Post = ({ id, author, time, content, likeUsers }) => {
     : false;
 
   const handleClickEvent = () => {
-    if (!loggedIn) alert("로그인 후 이용해주세요");
+    if (!loggedIn) {
+      alert("로그인 후 이용해주세요");
+      return;
+    }
 
     // 좋아요 목록에 로그인한 사용자가 있으면 제거, 아니면 추가
     const newLikeUsers = activationLike
