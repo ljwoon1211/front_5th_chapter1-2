@@ -23,7 +23,15 @@ export function setupEventListeners(container) {
   });
 }
 
-// 요소에 이벤트 핸들러 추가
+/**
+ * 특정 DOM 요소에 이벤트 핸들러를 연결하는 함수
+ * 실제로는 이벤트 리스너를 직접 추가하지 않고 매핑만 저장함
+ * 실제 이벤트 처리는 이벤트 위임을 통해 수행됨
+ *
+ * @param {HTMLElement} element - 이벤트가 발생할 DOM 요소
+ * @param {string} eventType - 이벤트 유형 (예: 'click', 'change')
+ * @param {Function} handler - 이벤트 발생 시 실행될 콜백 함수
+ */
 export function addEvent(element, eventType, handler) {
   // 모든 인자가 존재하는지 확인
   if (!element || !eventType || !handler) return;
