@@ -3,8 +3,11 @@ const registeredEventTypes = new Set();
 
 // DOM 요소와 이벤트 핸들러를 연결하는 맵
 const eventHandlerMap = new Map();
-
-// 컨테이너에 이벤트 리스너 설정하기
+/**
+ * 컨테이너 레벨에서 이벤트 리스너를 전역적으로 추가
+ * 이벤트 위임(event delegation) 방식을 사용
+ * @param {*} container
+ */
 export function setupEventListeners(container) {
   // 컨테이너에 이벤트 정보 저장할 공간이 없으면 생성
   if (!container._events) {
@@ -27,10 +30,9 @@ export function setupEventListeners(container) {
  * 특정 DOM 요소에 이벤트 핸들러를 연결하는 함수
  * 실제로는 이벤트 리스너를 직접 추가하지 않고 매핑만 저장함
  * 실제 이벤트 처리는 이벤트 위임을 통해 수행됨
- *
  * @param {HTMLElement} element - 이벤트가 발생할 DOM 요소
  * @param {string} eventType - 이벤트 유형 (예: 'click', 'change')
- * @param {Function} handler - 이벤트 발생 시 실행될 콜백 함수
+ * @param {Function} handler - 이벤트 발생 시 실행될 콜백 함수 handleClick
  */
 export function addEvent(element, eventType, handler) {
   // 모든 인자가 존재하는지 확인
@@ -50,8 +52,10 @@ export function addEvent(element, eventType, handler) {
   // 해당 이벤트 타입에 핸들러 저장
   elementEvents[eventType] = handler;
 }
-
-// 이벤트 처리 함수
+/**
+ * 이벤트 등록 함수
+ * @param {*} event
+ */
 function handleEvent(event) {
   // 이벤트가 발생한 요소
   let element = event.target;
